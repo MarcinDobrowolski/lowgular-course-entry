@@ -1,20 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { EmployeeModel } from '../../model/employee.model';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { EmployeeService } from '../../services/employee.service';
+import {PersonModel} from "../../model/person.model";
+
 
 
 @Component({
-  selector: 'employee-list',
+  selector: 'employee-list-dyzio',
   templateUrl: './employee-list.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeeListComponent {
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _employeeService: EmployeeService) {
   }
-  title: string = 'Tekst który pojawi się w html';
-  data$: Observable<EmployeeModel[] | null> = this._httpClient.get<EmployeeModel[]>('assets/data/employees.json');
-
+  data$: Observable<PersonModel[] | null> = this._employeeService.getAll();
 
 }
